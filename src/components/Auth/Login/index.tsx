@@ -1,8 +1,34 @@
+"use client";
 import Link from "next/link";
 import React from "react";
 import GoogleAuth from "../GoogleAuth";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { LoginForm } from "@/types/auth";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { LoginFormSchema } from "@/lib/formSchema";
+import AuthButton from "@/components/ui/AuthButton";
+import { loginUser } from "actions/auth";
 
 const Login = () => {
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors, isLoading },
+  } = useForm<LoginForm>({
+    resolver: zodResolver(LoginFormSchema),
+  });
+
+  const processForm: SubmitHandler<LoginForm> = async (data) => {
+    console.log("Login data", data);
+    const { email, password } = data;
+    try {
+      await loginUser(email, password);
+    } catch (error) {
+      console.log("Failed to login user, Error: ", error);
+      throw new Error(error);
+    }
+  };
   return (
     <div className="container">
       <div className="-mx-4 flex flex-wrap">
@@ -24,7 +50,7 @@ const Login = () => {
               </p>
               <span className="hidden h-[1px] w-full max-w-[70px] bg-body-color/50 sm:block"></span>
             </div>
-            <form>
+            <form onSubmit={handleSubmit(processForm)}>
               <div className="mb-8">
                 <label
                   htmlFor="email"
@@ -33,11 +59,16 @@ const Login = () => {
                   Your Email
                 </label>
                 <input
-                  type="email"
-                  name="email"
+                  {...register("email")}
                   placeholder="Enter your Email"
                   className="border-stroke w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:text-body-color-dark dark:shadow-two dark:focus:border-primary dark:focus:shadow-none"
                 />
+                {/* Error */}
+                {errors.email && (
+                  <p className="mt-1 text-sm text-red-500">
+                    {errors.email.message}
+                  </p>
+                )}
               </div>
               <div className="mb-8">
                 <label
@@ -48,10 +79,16 @@ const Login = () => {
                 </label>
                 <input
                   type="password"
-                  name="password"
+                  {...register("password")}
                   placeholder="Enter your Password"
                   className="border-stroke w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:text-body-color-dark dark:shadow-two dark:focus:border-primary dark:focus:shadow-none"
                 />
+                {/* Error */}
+                {errors.password && (
+                  <p className="mt-1 text-sm text-red-500">
+                    {errors.password.message}
+                  </p>
+                )}
               </div>
               <div className="mb-8 flex flex-col justify-between sm:flex-row sm:items-center">
                 <div className="mb-4 sm:mb-0">
@@ -97,9 +134,7 @@ const Login = () => {
                 </div>
               </div>
               <div className="mb-6">
-                <button className="flex w-full items-center justify-center rounded-sm bg-primary px-9 py-4 text-base font-medium text-white shadow-submit duration-300 hover:bg-primary/90 dark:shadow-submit-dark">
-                  Login
-                </button>
+                <AuthButton text="Login" />
               </div>
             </form>
             <p className="text-center text-base font-medium text-body-color">

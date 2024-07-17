@@ -8,7 +8,9 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { RegisterFormSchema } from "@/lib/formSchema";
 import { RegisterForm } from "@/types/auth";
+import { registerUser } from "../../../../actions/auth";
 import { z } from "zod";
+import { toast } from "sonner";
 
 const Register = () => {
   const {
@@ -22,7 +24,16 @@ const Register = () => {
 
   const processForm: SubmitHandler<RegisterForm> = async (data) => {
     console.log("Registeration data", data);
-    reset();
+    const result = await registerUser(data);
+    if (result?.isUserExists) {
+      toast(result?.message, { duration: 3000 });
+      return;
+    }
+
+    if (result?.isSuccess) {
+      toast(result?.message);
+      reset();
+    }
   };
 
   return (
@@ -63,7 +74,9 @@ const Register = () => {
                 />
                 {/* error */}
                 {errors.fullName && (
-                  <p className="text-xs text-red-500">{errors.fullName.message}</p>
+                  <p className="mt-1 text-sm text-red-500">
+                    {errors.fullName.message}
+                  </p>
                 )}
               </div>
               <div className="mb-8">
@@ -75,12 +88,16 @@ const Register = () => {
                   Email{" "}
                 </label>
                 <input
-                  type="email"
                   {...register("email")}
                   placeholder="Enter your Email"
                   className="border-stroke w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:text-body-color-dark dark:shadow-two dark:focus:border-primary dark:focus:shadow-none"
                 />
-                
+                {/* error */}
+                {errors.email && (
+                  <p className="mt-1 text-sm  text-red-500">
+                    {errors.email.message}
+                  </p>
+                )}
               </div>
               <div className="mb-8">
                 <label
@@ -96,6 +113,12 @@ const Register = () => {
                   placeholder="Enter your Password"
                   className="border-stroke w-full rounded-sm border bg-[#f8f8f8] px-6 py-3 text-base text-body-color outline-none transition-all duration-300 focus:border-primary dark:border-transparent dark:bg-[#2C303B] dark:text-body-color-dark dark:shadow-two dark:focus:border-primary dark:focus:shadow-none"
                 />
+                {/* error */}
+                {errors.password && (
+                  <p className="mt-1 text-sm text-red-500">
+                    {errors.password.message}
+                  </p>
+                )}
               </div>
               <div className="mb-8 flex">
                 <label

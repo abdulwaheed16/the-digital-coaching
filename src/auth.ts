@@ -1,12 +1,14 @@
 import { PrismaAdapter } from "@auth/prisma-adapter";
-import { prisma } from "@/config/prismaConfig";
+import { prismadb } from "@/config/prismaConfig";
 import CredentialProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
 import NextAuth from "next-auth";
 import { NextConfig } from "next";
+import { LoginForm } from "./types/auth";
+import { comparePassword } from "./lib/utils";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
-  adapter: PrismaAdapter(prisma),
+  adapter: PrismaAdapter(prismadb),
   session: { strategy: "jwt" },
 
   // Providers----------------------------------------------------------------
@@ -20,9 +22,51 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         },
       },
     }),
-    // GoogleProvider,
+
     // credentials Provider
-    CredentialProvider({}),
+    CredentialProvider({
+      name: "credentials",
+      credentials: {
+        email: {
+          label: "Email",
+          type: "email",
+          placeholder: "example@gmail.com",
+        },
+        password: {
+          label: "Password",
+          type: "password",
+          placeholder: "********",
+        },
+      },
+      async authorize(credentials) {
+        console.log("login credentials: ", credentials);
+        const { email, password } = credentials as LoginForm;
+        if (!email || !password) {
+          throw new Error("Please provide both email and password.");
+        }
+
+        const user = await prismadb.user.findUnique({
+          where: {
+            email,
+          },
+        });
+
+        const isPassMatch = await comparePassword(
+          user?.hashedPassword,
+          password,
+        );
+
+        if (!isPassMatch) {
+          throw new Error("Invalid email or password.");
+        }
+
+        if (!user) {
+          throw new Error("No user found with that email.");
+        }
+
+        return user;
+      },
+    }),
   ],
 
   // Callbacks----------------------------------------------------------------

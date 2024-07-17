@@ -20,6 +20,7 @@ model User {
   hashedPassword String?
   salt           String?
   resetToken     String?
+  isVerified     Boolean?
   emailVerified  DateTime?
   image          String?
   accounts       Account[]
