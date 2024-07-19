@@ -67,20 +67,27 @@ export const loginUser = async (email: string, password: string) => {
     if (!user) {
       // throw new Error("User not found.");
       return {
-        isUserNotFound: true,
-        message: "You are NOT registered.",
+        isInvalid: true,
+        message: "Invalid email or password.",
       };
     }
 
-    const isPasswordValid = comparePassword(user?.hashedPassword, password);
+    // const isPasswordValid = comparePassword(user?.hashedPassword, password);
 
-    if (!isPasswordValid) {
-      // throw new Error("Invalid password.");
-      return { isPasswordIncorrect: true, message: "Invalid password." };
-    }
+    // if (!isPasswordValid) {
+    //   // throw new Error("Invalid password.");
+    //   return {
+    //     isInvalid: true,
+    //     message: "Invalid email or password.",
+    //   };
+    // }
+
+    const userCredentials = { email, password };
 
     try {
-      await signIn("credentials", { email, password });
+      const result = await signIn("credentials", userCredentials);
+      console.log("Login Result: " + result);
+      revalidatePath("/");
     } catch (error) {
       if (error instanceof AuthError) {
         switch (error?.type) {
@@ -89,8 +96,6 @@ export const loginUser = async (email: string, password: string) => {
         }
       }
     }
-
-    return { isSuccess: true, message: "User logged in successfully." };
   } catch (error) {
     console.log("Failed to login user, Error: ", error);
     return { isError: true, message: error.message };

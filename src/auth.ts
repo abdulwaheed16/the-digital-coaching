@@ -5,6 +5,7 @@ import GoogleProvider from "next-auth/providers/google";
 import NextAuth from "next-auth";
 import { NextConfig } from "next";
 import { LoginForm } from "./types/auth";
+import bcrypt from "bcryptjs";
 import { comparePassword } from "./lib/utils";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
@@ -51,17 +52,19 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           },
         });
 
-        const isPassMatch = await comparePassword(
-          user?.hashedPassword,
-          password,
-        );
+        // const isPassMatch = comparePassword(user?.hashedPassword, password);
+        // const isPassMatch = await bcrypt.compare(
+        //   user.hashedPassword.toString(),
+        //   password.toString(),
+        // );
 
-        if (!isPassMatch) {
-          throw new Error("Invalid email or password.");
-        }
+        // if (!isPassMatch) {
+        //   throw new Error("Invalid email or password.");
+        // }
 
         if (!user) {
-          throw new Error("No user found with that email.");
+          return null;
+          // throw new Error("No user found with that email.");
         }
 
         return user;

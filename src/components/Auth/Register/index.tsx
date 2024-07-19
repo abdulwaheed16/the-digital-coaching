@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 import GoogleAuth from "../GoogleAuth";
 import { Button } from "@/components/ui/button";
 import AuthButton from "@/components/ui/AuthButton";
@@ -13,6 +13,7 @@ import { z } from "zod";
 import { toast } from "sonner";
 
 const Register = () => {
+  const [isPending, setIsPending] = useState(false);
   const {
     register,
     handleSubmit,
@@ -23,16 +24,24 @@ const Register = () => {
   });
 
   const processForm: SubmitHandler<RegisterForm> = async (data) => {
-    console.log("Registeration data", data);
-    const result = await registerUser(data);
-    if (result?.isUserExists) {
-      toast(result?.message, { duration: 3000 });
-      return;
-    }
+    try {
+      console.log("Registeration data", data);
+      setIsPending(true);
+      const result = await registerUser(data);
+      if (result?.isUserExists) {
+        toast(result?.message, { duration: 3000 });
+        return;
+      }
 
-    if (result?.isSuccess) {
-      toast(result?.message);
-      reset();
+      if (result?.isSuccess) {
+        toast(result?.message);
+        reset();
+      }
+    } catch (error) {
+      console.log("Failed to register user, Error: ", error);
+      toast(error.message, { duration: 3000 });
+    } finally {
+      setIsPending(false);
     }
   };
 
@@ -166,7 +175,7 @@ const Register = () => {
                 </label>
               </div>
               <div className="mb-6">
-                <AuthButton text="Register" />
+                <AuthButton text="Register" isPending={isPending} />
               </div>
             </form>
             <p className="text-center text-base font-medium text-body-color">

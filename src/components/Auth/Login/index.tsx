@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 import GoogleAuth from "../GoogleAuth";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { LoginForm } from "@/types/auth";
@@ -8,13 +8,15 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { LoginFormSchema } from "@/lib/formSchema";
 import AuthButton from "@/components/ui/AuthButton";
 import { loginUser } from "actions/auth";
+import { toast } from "sonner";
 
 const Login = () => {
+  const [isPending, setIsPending] = useState(false);
   const {
     register,
     handleSubmit,
     reset,
-    formState: { errors, isLoading },
+    formState: { errors },
   } = useForm<LoginForm>({
     resolver: zodResolver(LoginFormSchema),
   });
@@ -23,10 +25,19 @@ const Login = () => {
     console.log("Login data", data);
     const { email, password } = data;
     try {
-      await loginUser(email, password);
+      setIsPending(true);
+      const result = await loginUser(email, password);
+      console.log("Login Result----", {
+        result,
+        error: result?.error,
+        message: result?.message,
+      });
+      toast(result?.error);
     } catch (error) {
       console.log("Failed to login user, Error: ", error);
       throw new Error(error);
+    } finally {
+      setIsPending(false);
     }
   };
   return (
@@ -134,7 +145,7 @@ const Login = () => {
                 </div>
               </div>
               <div className="mb-6">
-                <AuthButton text="Login" />
+                <AuthButton text="Login" isPending={isPending} />
               </div>
             </form>
             <p className="text-center text-base font-medium text-body-color">

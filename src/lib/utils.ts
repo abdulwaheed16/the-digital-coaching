@@ -36,5 +36,5 @@ export const comparePassword = (
   storedPassword: string,
   newPassword: string,
 ) => {
-  return bcrypt.compareSync(newPassword, storedPassword);
+  return bcrypt.compareSync(storedPassword, newPassword);
 };
