@@ -3,7 +3,7 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import { registerUser } from "actions/auth";
 
 // regiser user service -------------------------------------------------------------
-export const registerUserService = (user: RegisterForm) => {
+export const RegisterUserService = (user: RegisterForm) => {
   const query = useQuery({
     queryKey: ["regiserUser"],
     queryFn: async () => {

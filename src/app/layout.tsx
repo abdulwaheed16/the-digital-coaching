@@ -7,7 +7,7 @@ import { Inter } from "next/font/google";
 import "node_modules/react-modal-video/css/modal-video.css";
 import "../styles/global.css";
 import Providers from "@/lib/providers";
-import { usePathname } from "next/navigation";
+import { redirect, usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -40,11 +40,11 @@ export default function RootLayout({
 
       <body className={`bg-[#FCFCFC] dark:bg-black ${inter.className}`}>
         <Providers session={params?.session}>
-          {!isDashboardRoute && <Header />}
+          {/* {!isDashboardRoute && <Header />} */}
           {children}
 
-          {isDashboardRoute ? <></> : <Footer />}
-          <ScrollToTop />
+          {/* {isDashboardRoute ? <></> : <Footer />} */}
+          {/* <ScrollToTop /> */}
         </Providers>
       </body>
     </html>

@@ -171,7 +171,9 @@ const Header = () => {
                   </ul>
                 </nav>
               </div>
-              <div className="flex items-center justify-end pr-16 lg:pr-0">
+
+              {/* Right Nav */}
+              {/* <div className="flex items-center justify-end pr-16 lg:pr-0">
                 {session?.data?.user ? (
                   <ProfileAvatar />
                 ) : (
@@ -192,6 +194,18 @@ const Header = () => {
                     </Link>
                   </>
                 )}
+                <div>
+                  <ThemeToggler />
+                </div>
+              </div> */}
+
+              <div className="flex items-center justify-end pr-16 lg:pr-0">
+                <Link
+                  href="/contact"
+                  className="ease-in-up hidden rounded-sm bg-primary px-8 py-3 text-base font-medium text-white shadow-btn transition duration-300  hover:shadow-btn-hover md:block md:px-9 lg:px-6 xl:px-9"
+                >
+                  Contact
+                </Link>
                 <div>
                   <ThemeToggler />
                 </div>

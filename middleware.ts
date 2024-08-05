@@ -3,6 +3,8 @@ import { NextRequest, NextResponse } from "next/server";
 
 const protectedRoutes = ["/dashboard"];
 export default async function middleware(req: NextRequest, res: NextResponse) {
+  const absolutePath = new URL("/", req?.nextUrl?.origin);
+
   const session = await auth();
 
   const isProtected = protectedRoutes?.some((route) =>
@@ -10,7 +12,6 @@ export default async function middleware(req: NextRequest, res: NextResponse) {
   );
 
   if (isProtected && !session?.user) {
-    const absolutePath = new URL("/", req?.nextUrl?.origin);
     return NextResponse.redirect(absolutePath.toString());
   }
 
