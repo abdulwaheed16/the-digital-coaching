@@ -2,7 +2,7 @@ import { NewsLetter } from "@/types";
 import { useQuery } from "@tanstack/react-query";
 import { sendNewsletter } from "actions/newsLetter";
 
-export const newsLetterService = async ({ email }: NewsLetter) => {
+export const NewsLetterService = async ({ email }: NewsLetter) => {
   console.log("newsLetter service email--------", email);
   const query = useQuery({
     queryKey: ["regiserUser"],

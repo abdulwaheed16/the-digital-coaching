@@ -3,7 +3,7 @@ import React from "react";
 import { Input } from "../ui/input";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { NewsLetter } from "@/types";
-import { newsLetterService } from "@/services/newsLetterService";
+// import { newsLetterService } from "@/services/newsLetterService";
 
 const EmailForm = () => {
   const {
@@ -15,17 +15,17 @@ const EmailForm = () => {
 
   const processForm: SubmitHandler<NewsLetter> = async (data) => {
     console.log("Newsletter data", data);
-    try {
-      const {
-        data: responseData,
-        isSuccess,
-        isPending,
-        isError,
-      } = await newsLetterService({ email: data.email });
-      reset();
-    } catch (error) {
-      console.error(error);
-    }
+    // try {
+    //   const {
+    //     data: responseData,
+    //     isSuccess,
+    //     isPending,
+    //     isError,
+    //   } = await newsLetterService({ email: data.email });
+    //   reset();
+    // } catch (error) {
+    //   console.error(error);
+    // }
   };
 
   return (
