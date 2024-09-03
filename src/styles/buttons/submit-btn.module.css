@@ -1,0 +1,64 @@
+.submitbtn {
+  all: unset;
+  display: flex;
+  align-items: center;
+  position: relative;
+  border: mediumspringgreen solid 0.15em;
+  border-radius: 0.25em;
+  color: mediumspringgreen;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  /* font-size: 1.5em;
+  font-weight: 600; */
+  cursor: pointer;
+  overflow: hidden;
+  transition: border 300ms, color 300ms;
+  user-select: none;
+}
+
+.submitbtn p {
+  z-index: 1;
+}
+
+.submitbtn:hover {
+  color: #212121;
+}
+
+.submitbtn:active {
+  border-color: teal;
+}
+
+.submitbtn::after, .submitbtn::before {
+  content: "";
+  position: absolute;
+  width: 9em;
+  aspect-ratio: 1;
+  background: mediumspringgreen;
+  opacity: 50%;
+  border-radius: 50%;
+  transition: transform 500ms, background 300ms;
+}
+
+.submitbtn::before {
+  left: 0;
+  transform: translateX(-8em);
+}
+
+.submitbtn::after {
+  right: 0;
+  transform: translateX(8em);
+}
+
+.submitbtn:hover:before {
+  transform: translateX(-1em);
+}
+
+.submitbtn:hover:after {
+  transform: translateX(1em);
+}
+
+.submitbtn:active:before,
+.submitbtn:active:after {
+  background: teal;
+}

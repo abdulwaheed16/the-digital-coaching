@@ -1,6 +1,8 @@
 import Breadcrumb from "@/components/Common/Breadcrumb";
+import Contact from "@/components/Contact";
+import { sleep } from "@/lib/utils";
 // import Contact from "@/components/Contact/form1";
-import ContactForm from "@/components/Contact";
+// import ContactForm from "@/components/Contact";
 
 import { Metadata } from "next";
 
@@ -10,7 +12,9 @@ export const metadata: Metadata = {
   // other metadata
 };
 
-const ContactPage = () => {
+const ContactPage = async () => {
+  await sleep(4000);
+
   return (
     <>
       <Breadcrumb
@@ -19,7 +23,7 @@ const ContactPage = () => {
       />
       {/* <Contact /> */}
       {/* Multistep form */}
-      <ContactForm />
+      <Contact />
     </>
   );
 };

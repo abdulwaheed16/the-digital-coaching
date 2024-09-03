@@ -38,13 +38,13 @@ export default function RootLayout({
       */}
       <head />
 
-      <body className={`bg-[#FCFCFC] dark:bg-black ${inter.className}`}>
+      <body className={`bg-white dark:bg-black ${inter.className}`}>
         <Providers session={params?.session}>
           {/* {!isDashboardRoute && <Header />} */}
           {children}
 
           {/* {isDashboardRoute ? <></> : <Footer />} */}
-          {/* <ScrollToTop /> */}
+          <ScrollToTop />
         </Providers>
       </body>
     </html>

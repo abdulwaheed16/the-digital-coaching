@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import AuthButton from "@/components/ui/AuthButton";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { RegisterFormSchema } from "@/lib/formSchema";
+import { RegisterFormSchema } from "@/lib/zodSchemas";
 import { RegisterForm } from "@/types/auth";
 import { registerUser } from "../../../../actions/auth";
 import { z } from "zod";

@@ -1,0 +1,50 @@
+/* From Uiverse.io by mateusneves */ 
+.next_btn {
+  position: relative;
+  letter-spacing: 3px;
+  border: none;
+  color: #fff;
+  text-transform: uppercase;
+  overflow: hidden;
+  border-radius: 5px
+ }
+ 
+ .next_btn::before {
+  content: '';
+  display: block;
+  position: absolute;
+  z-index: 0;
+  bottom: 0;
+  left: 0;
+  height: 0px;
+  width: 100%;
+  /* background: rgb(23, 173, 211);
+  background: linear-gradient(90deg, hwb(177 30% 5%) 20%, rgba(124,7,46,1) 100%);
+  transition: 0.2s; */
+ }
+ 
+ .next_btn .label {
+  position: relative;
+ }
+ 
+ .next_btn .icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 3em;
+  width: 3em;
+  position: absolute;
+  top: 3em;
+  right: 0;
+  opacity: 0;
+  transition: 0.4s;
+ }
+ 
+ .next_btn:hover::before {
+  height: 100%;
+ }
+ 
+ .next_btn:hover .icon {
+  top: 0;
+  opacity: 1;
+ }

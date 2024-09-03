@@ -38,3 +38,7 @@ export const comparePassword = (
 ) => {
   return bcrypt.compareSync(storedPassword, newPassword);
 };
+
+export const sleep = (seconds: number) => {
+  return new Promise((resolve) => setTimeout(resolve, seconds));
+};

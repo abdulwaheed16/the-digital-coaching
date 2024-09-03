@@ -5,7 +5,7 @@ import GoogleAuth from "../GoogleAuth";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { LoginForm } from "@/types/auth";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { LoginFormSchema } from "@/lib/formSchema";
+import { LoginFormSchema } from "@/lib/zodSchemas";
 import AuthButton from "@/components/ui/AuthButton";
 import { loginUser } from "actions/auth";
 import { toast } from "sonner";

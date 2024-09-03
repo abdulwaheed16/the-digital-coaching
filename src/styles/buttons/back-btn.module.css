@@ -1,0 +1,49 @@
+/* From Uiverse.io by mateusneves */ 
+.back_btn {
+  position: relative;
+  letter-spacing: 3px;
+  border: none;
+  color: #fff;
+  text-transform: uppercase;
+  overflow: hidden;
+  border-radius: 5px
+ }
+ 
+ .back_btn::before {
+  content: '';
+  display: block;
+  position: absolute;
+  z-index: 0;
+  bottom: 0;
+  right: 0;
+  height: 0px;
+  width: 100%;
+  /* background: transparent;
+  transition: 0.2s; */
+ }
+ 
+ .back_btn .label {
+  position: relative;
+ }
+ 
+ .back_btn .icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 3em;
+  width: 3em;
+  position: absolute;
+  top: 3em;
+  left: 0;
+  opacity: 0;
+  transition: 0.4s;
+ }
+ 
+ .back_btn:hover::before {
+  height: 100%;
+ }
+ 
+ .back_btn:hover .icon {
+  top: 0;
+  opacity: 1;
+ }

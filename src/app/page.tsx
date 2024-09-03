@@ -5,7 +5,7 @@ import Brands from "@/components/Brands";
 import CommingSoon from "@/components/CommingSoon";
 import ScrollUp from "@/components/Common/ScrollUp";
 import SocialLinks from "@/components/Common/SocialLinks";
-import Contact from "@/components/Contact/form1";
+// import Contact from "@/components/Contact/form1";
 import Features from "@/components/Features";
 import Hero from "@/components/Hero";
 import Pricing from "@/components/Pricing";

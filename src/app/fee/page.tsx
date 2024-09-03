@@ -3,8 +3,8 @@ import React from "react";
 
 const FeeStructurePage = () => {
   return (
-    <section className="relative z-10  h-[90vh] w-full bg-gray-light px-4 py-16 pb-[120px] pt-[350px] dark:bg-bg-color-dark ">
-      <div className="mx-auto lg:w-8/12">
+    <section className="relative z-10  h-[90vh] w-full px-4 py-16 pb-[120px] pt-[350px] dark:bg-bg-color-dark ">
+      <div className="mx-auto lg:w-8/12 ">
         <FeeStructure />
       </div>
       {/* bg-styling-blobs */}

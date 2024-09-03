@@ -4,12 +4,12 @@ import { CircleCheckBig } from "lucide-react";
 
 const Banifits = () => {
   return (
-    <div className="pb-10 pt-12">
-      <h2 className=" pb-4 pt-10 text-center text-3xl font-medium">
-        You will get{" "}
+    <div className="mx-auto pb-10 pt-12 xl:w-8/12">
+      <h2 className=" px-2 pb-4 pt-10 text-start text-2xl font-normal">
+        Banifits you will get along with each package
       </h2>
       {/* banifits card */}
-      <div className="mx-auto xl:w-8/12">
+      <div className="">
         <div className="flex justify-center">
           <ul className="grid gap-3 px-2 py-4 md:grid-cols-2 lg:grid-cols-3">
             {banifits?.map((banifit: string, index: number) => (

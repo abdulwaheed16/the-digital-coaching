@@ -1,5 +1,12 @@
 import { z } from "zod";
 
+export const NewsLetterSchema = z.object({
+  email: z
+    .string()
+    .email({ message: "Email should contain '@' symbol" })
+    .nonempty({ message: "Please enter your email address" }),
+});
+
 export const RegisterFormSchema = z.object({
   fullName: z.string().nonempty({ message: "Name is required" }),
   email: z

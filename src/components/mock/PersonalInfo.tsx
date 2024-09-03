@@ -8,11 +8,7 @@ interface IProps {
 }
 const PersonalInfo = ({ delta, errors, register }: IProps) => {
   return (
-    <motion.div
-      initial={{ x: delta >= 0 ? "50%" : "-50%", opacity: 0 }}
-      animate={{ x: 0, opacity: 1 }}
-      transition={{ duration: 0.3, ease: "easeInOut" }}
-    >
+    <>
       <h2 className="text-base font-semibold leading-7 text-gray-900">
         Personal Information
       </h2>
@@ -88,7 +84,7 @@ const PersonalInfo = ({ delta, errors, register }: IProps) => {
           </div>
         </div>
       </div>
-    </motion.div>
+    </>
   );
 };
 

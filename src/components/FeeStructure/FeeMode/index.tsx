@@ -33,6 +33,7 @@ const FeeMode = ({ feemode }: IProps) => {
         </h2>
 
         <div className="px-2 lg:hidden">
+          {/*  */}
           <FeeDesign1 feedata={fee_data} feemode={feemode} />
         </div>
         <div className="hidden px-2 lg:block">
