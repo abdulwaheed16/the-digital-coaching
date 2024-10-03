@@ -22,13 +22,13 @@ export default function RootLayout({
   const [isDashboardRoute, setIsDashboardRoute] = useState(false);
   const pathname = usePathname();
 
-  useEffect(() => {
-    if (pathname.startsWith("/dashboard")) {
-      setIsDashboardRoute(true);
-    } else {
-      setIsDashboardRoute(false);
-    }
-  }, [pathname]);
+  // useEffect(() => {
+  //   if (pathname.startsWith("/dashboard")) {
+  //     setIsDashboardRoute(true);
+  //   } else {
+  //     setIsDashboardRoute(false);
+  //   }
+  // }, [pathname]);
 
   return (
     <html suppressHydrationWarning lang="en">
