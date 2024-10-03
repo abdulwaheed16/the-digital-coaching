@@ -11,9 +11,9 @@ interface IProps {
 }
 const Providers = ({ children, session }: IProps) => {
   const pathname = usePathname();
-  // if (pathname !== "/") {
-  //   redirect("/");
-  // }
+  if (pathname !== "/") {
+    redirect("/");
+  }
   return (
     <ThemeProvider attribute="class" enableSystem={false} defaultTheme="dark">
       <AuthProvider session={session}>
